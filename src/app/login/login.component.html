@@ -1,0 +1,36 @@
+<div class="sample">
+    <div class="d-flex justify-content-center align-items-center hClass">
+        <p>Patient System</p>
+    </div>
+    <h3 class="text-center mt-3" style="font-weight:400;font-size:21px">Login to your Account</h3>
+    <form [formGroup]="loginform" (ngSubmit)="onSubmit(loginform)" style="padding:40px">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" formControlName="username"
+                [class.is-invalid]="loginform.get('username')?.invalid && loginform.get('email')?.touched"
+                class="form-control" placeholder="Username">
+            <div *ngIf="loginform.get('username')?.invalid && loginform.get('username')?.touched">
+                <small class="text-danger" *ngIf="loginform.get('username')?.errors?.['required']">Username
+                    Required</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" formControlName="password"
+                [class.is-invalid]="loginform.get('password')?.invalid && loginform.get('password')?.touched"
+                class="form-control" id="myinput" placeholder="Password">
+            <div *ngIf="loginform.get('password')?.invalid && loginform.get('password')?.touched">
+                <small class="text-danger" *ngIf="loginform.get('password')?.errors?.['required']">Password
+                    Required</small>
+            </div>
+        </div>
+        <input type="checkbox" formControlName="rememberMeChecked" class="mt-2 text-secondary">&nbsp; <label> Remember
+            me</label>
+
+        <div align="center"> <button [disabled]="loginform.invalid" class="btn  btn-lg btn-block  mt-3 btnClass"
+                type="submit">Login</button>
+        </div>
+    </form>
+    <p class="text-danger text-md text-center" *ngIf="wronguser==true">Invalid credentials</p>
+
+</div>

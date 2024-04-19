@@ -1,0 +1,25 @@
+.sample {
+    /* padding:120px; */
+    /* border:1px solid grey; */
+    box-shadow: 2px 2px 19px 2px lightgrey;
+}
+
+.containerClass {
+    background-color: #F4F6F6;
+    /* padding:90px 60px; */
+}
+
+.pClass {
+    background-color: white;
+    padding: 0px 0px 23px 0px;
+    margin: 23px 0px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.logoutClass {
+    font-size: 17px;
+    color: red;
+    cursor: pointer;
+    ;
+}

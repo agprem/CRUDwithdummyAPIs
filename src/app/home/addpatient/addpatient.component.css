@@ -1,0 +1,18 @@
+.sample{
+    box-shadow: 2px 2px 19px 2px lightgrey;
+  }
+  .fullwidth{
+      width: 95%;;
+  }
+  .pClass{
+    background-color: white;
+    padding: 20px;
+    margin: 23px 0px;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .phoneBtn{
+    height: 53px !important;
+    white-space: nowrap;
+  }
+  

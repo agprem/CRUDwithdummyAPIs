@@ -1,0 +1,68 @@
+<div class="containerClass">
+  <div class="pClass d-flex justify-content-between">
+    <p>Patient Dashboard</p>
+    <p class="text-end logoutClass me-2" (click)="logout()">Logout</p>
+  </div>
+  <div class="row px-5">
+    <!-- ADD PATIENT  CHILD COMPONENT -->
+    <div class="col m-1">
+      <app-addpatient [isEditMode]="isEditMode" [formdata]="data" (listData)="getListdata($event)"></app-addpatient>
+    </div>
+    <!-- TABLE WITH EDIT AND DELETE BUTTONS -->
+    <div class="col mx-1">
+      <div class="container sample">
+        <div class="d-flex justify-content-between">
+          <p class="my-4 ms-2" style="font-size: 18px;
+      font-weight: bold;">Patient List</p>
+          <!-- SEARCH-->
+          <div class="my-3 text-end me-3">
+            <input matInput placeholder="  Search by First Name" autocomplete="off" (keyup)="onSearchInputChange($event)" style="border: 1px solid lightgrey;
+    height: 40px">
+          </div>
+        </div>
+        <table mat-table [dataSource]="datasource">
+          <ng-container matColumnDef="firstname">
+            <mat-header-cell *matHeaderCellDef class="col">
+              First Name
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let element" class="col" style=" word-break: break-word;">
+              {{element?.firstName}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="lastname">
+            <mat-header-cell *matHeaderCellDef class="col">
+              Last Name
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let element" class="col" style=" word-break: break-word;">
+              {{element?.lastName}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="address">
+            <mat-header-cell *matHeaderCellDef class="col">
+              Address
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let element" class="col" style=" word-break: break-all;">
+              {{element?.address?.address}}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="Action">
+            <mat-header-cell mat-header-cell *matHeaderCellDef class="col ">
+              Action
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="col">
+              <i class="fas fa-edit mx-3" (click)="editRecord(element)"></i>
+              <i class="fas fa-trash" (click)="delete(element)"></i>
+
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns" style="background: lightgrey;
+    margin: 0px -12px;font-weight:600"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

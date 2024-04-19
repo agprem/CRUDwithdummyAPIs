@@ -1,0 +1,20 @@
+.confirmationsnackbar img {
+    width: 24px;
+    height: 24px;
+    padding-right: 0px;
+  }
+  
+  .infomessage {
+    font-size: 15px;
+    padding-right: 0px;
+    text-align: center;
+  }
+  
+  .infobutton {
+    color:black;
+    padding-right: 0px;
+    padding-left: 8px;
+  }
+ 
+  
+  

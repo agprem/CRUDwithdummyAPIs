@@ -1,0 +1,18 @@
+<div class="row">
+    
+    <div class="col-7 infomessage">{{ data.message }}</div>
+    <div class="col-2 offset-1 infobutton">
+      <button class="btn btn-dark" mat-button (click)="actionConfirmed()">
+        {{ data.positive }}
+      </button>
+    </div>
+    <div class="col-2 infobutton">
+      <button class="btn btn-light" mat-button (click)="snackBarRef.dismiss()">
+        {{ data.negative }}
+      </button>
+    </div>
+  </div>
+
+  
+
+

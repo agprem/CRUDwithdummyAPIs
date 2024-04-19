@@ -1,0 +1,130 @@
+<div class="container sample">
+    <div class="d-flex">
+        <p *ngIf="!iseditmode" class="my-4 ms-2" style="font-size: 18px;
+        font-weight: bold">Patient Details</p>
+    </div>
+    <form (ngSubmit)="addRecord()" [formGroup]='addform' class="p-2">
+        <div class="row m-2">
+            <div class="form-group col-4">
+                <p>First Name*</p>
+                <mat-form-field appearance="outline" class="fullwidth">
+                    <input matInput placeholder="First Name" formControlName="firstName" required id="firstname"
+                        class="form-control" />
+                </mat-form-field>
+                <small *ngIf="addform.get('firstName').errors?.['required'] && addform.touched"
+                    class="text-danger">First name
+                    Required</small>
+                <small
+                    *ngIf="(addform.get('firstName').errors?.['minlength'] || addform.get('firstName').errors?.['maxlength']) && addform.touched"
+                    class="text-danger">Minimum 2 and Max 20 characters allowed
+                </small>
+
+
+            </div>
+            <div class="form-group col-4">
+                <p>Last Name*</p>
+                <mat-form-field appearance="outline" class="fullwidth">
+                    <input matInput placeholder="Last Name" formControlName="lastName" required id="lastname"
+                        class="form-control" />
+                </mat-form-field>
+                <small *ngIf="addform.get('lastName').errors?.['required'] && addform.touched" class="text-danger">Last
+                    name
+                    Required</small>
+                <small
+                    *ngIf="(addform.get('lastName').errors?.['minlength'] || addform.get('lastName').errors?.['maxlength']) && addform.touched"
+                    class="text-danger">Minimum 2 and Max 20 characters allowed
+                </small>
+            </div>
+            <div class="form-group col-4">
+                <p>Email*</p>
+                <mat-form-field appearance="outline" class="fullwidth">
+                    <input matInput placeholder="Email" formControlName="email" required id="email"
+                        class="form-control" />
+                </mat-form-field>
+                <small *ngIf="addform.get('email').errors?.['required'] && addform.touched" class="text-danger">Email
+                    Required</small>
+                <small *ngIf="addform.get('email').errors?.['pattern'] && addform.touched" class="text-danger">Please
+                    enter correct email
+                    format</small>
+            </div>
+            <div formGroupName="address" class="row">
+                <div class="form-group col-4">
+                    <p>Address Line 1*</p>
+                    <mat-form-field appearance="outline" class="fullwidth">
+                        <input matInput type="text" placeholder="Enter address" formControlName="address" required
+                            id="address" style="margin-top:+4px;" />
+                    </mat-form-field>
+                    <small *ngIf="addform.get('address').get('address').invalid && addform.touched"
+                        class="text-danger">Address Required</small>
+                </div>
+                <div class="form-group col-4">
+                    <p>Address Line 2</p>
+                    <mat-form-field appearance="outline" class="fullwidth">
+                        <input matInput type="text" placeholder="Enter address2" formControlName="address2"
+                            id="address2" style="margin-top:+4px;" />
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-4">
+                    <p>City*</p>
+                    <mat-form-field appearance="outline" class="fullwidth">
+                        <input matInput type="text" placeholder="Enter city" formControlName="city" required id="city"
+                            style="margin-top:+4px;" />
+                    </mat-form-field>
+                    <small *ngIf="addform.get('address').get('city').invalid && addform.touched"
+                        class="text-danger">City Required</small>
+                </div>
+                <div class="form-group col-4">
+                    <p>State*</p>
+                    <mat-form-field appearance="outline" class="fullwidth">
+                        <input matInput type="text" placeholder="Enter State" formControlName="state" required
+                            id="state" style="margin-top:+4px;" />
+                    </mat-form-field>
+                    <small *ngIf="addform.get('address').get('state').invalid && addform.touched"
+                        class="text-danger">State Required</small>
+                </div>
+                <div class="col-4">
+                    <p>ZipCode*</p>
+                    <mat-form-field appearance="outline" class="fullwidth">
+                        <input matInput type="number" placeholder="Enter Zipcode" formControlName="postalCode" required
+                            id="zipcode" style="margin-top:+4px;" />
+                    </mat-form-field>
+                    <small *ngIf="addform.get('address').get('postalCode').invalid && addform.touched"
+                        class="text-danger">ZipCode Required</small>
+
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <p>Phone*</p>
+                <div formArrayName="phone">
+                    <div *ngFor="let phone of getPhone().controls ;let i = index">
+                        <div [formGroupName]="i">
+                            <div class="row my-2">
+                                <mat-form-field appearance="outline" class="fullwidth col">
+                                    <input type="text" matInput formControlName="phone" placeholder='   Phone no' />
+                                </mat-form-field>
+                                <button (click)="removePhone(i)" class="col ms-2 btn btn-primary phoneBtn"
+                                    [disabled]="getPhone().length==1">Remove
+                                    Phone </button>
+                            </div>
+                        </div>
+                        <small *ngIf="phone.get('phone').invalid && addform.touched" class="text-danger">Please Enter
+                            Phone number</small>
+                    </div>
+                    <button (click)="addPhone($event)" class="my-3 btn btn-primary" type="button">Add Phone</button>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div align="end" class="my-4 p-4 ">
+        <button class="btn btn-primary" appHover *ngIf="!iseditmode && iseditmode!=undefined" (click)="addRecord()"
+            type="">Add</button>
+        <button class="btn btn-primary" *ngIf="iseditmode || iseditmode==undefined" (click)="updateRecord(addform)"
+            type="submit">Update</button>
+        <button class="btn btn-secondary" style="margin-left:5px" (click)="resetForm()" type="submit">Reset</button>
+    </div>
+    <span style="color:red" *ngIf="addform.invalid  && addform.touched">Please fill all the fields.</span>
+</div>
+<p class="text-success text-md text-center" *ngIf="edited==true">Record Updated Succesfully</p>
+<p class="text-success text-md text-center" *ngIf="edited==false">Record Added Succesfully</p>
